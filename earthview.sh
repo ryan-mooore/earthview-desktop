@@ -42,13 +42,16 @@ curl -s $imageUrl -o view.jpg --output-dir $current_dir
 # crop image
 magick convert "$current_dir/view.jpg" -gravity center -crop "$width:$height" "$current_dir/view.jpg"
 
+# upscale image
+magick convert "$current_dir/view.jpg" -filter point -resize 400% "$current_dir/view.jpg"
+
 # caption image
 magick convert "$current_dir/view.jpg" \
-    -font .SF-Compact \
+    -pointsize 60 \
     -undercolor "#00000060" \
     -fill "#ffffff" \
     -gravity southwest \
-    -annotate +10+10 \
+    -annotate +80+80 \
     "\ $place " "$current_dir/annotated.jpg"
 
 # set image as wallpaper
